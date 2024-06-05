@@ -377,9 +377,9 @@ case $STEP in
 
             # APT installing packages
             # Downgrade kernel and headers for Nvidia drivers to install successfully
-            # apt install proxmox-kernel-6.5 proxmox-headers-6.5
+            # apt install proxmox-kernel-6.8 proxmox-headers-6.8
             # used to be pve-headers, but that will use latest version (which is currently 6.8)
-            run_command "Installing packages" "info" "apt install -y git build-essential dkms proxmox-kernel-6.5 proxmox-headers-6.5 mdevctl megatools"
+            run_command "Installing packages" "info" "apt install -y git build-essential dkms proxmox-kernel-6.8 proxmox-headers-6.8 mdevctl megatools"
 
             # Pinning the kernel
             kernel_version_compare() {
@@ -388,10 +388,10 @@ case $STEP in
                 printf '%s\n' "$ver1" "$ver2" | sort -V -r | head -n 1
             }
 
-            # Get the kernel list and filter for 6.5 kernels
-            kernel_list=$(proxmox-boot-tool kernel list | grep "6.5")
+            # Get the kernel list and filter for 6.8 kernels
+            kernel_list=$(proxmox-boot-tool kernel list | grep "6.8")
 
-            # Check if any 6.5 kernels are available
+            # Check if any 6.8 kernels are available
             if [[ -n "$kernel_list" ]]; then
                 # Extract the highest version
                 highest_version=""
@@ -404,10 +404,10 @@ case $STEP in
                     fi
                 done <<< "$kernel_list"
 
-                # Pin the highest 6.5 kernel
+                # Pin the highest 6.8 kernel
                 run_command "Pinning kernel: $highest_version" "info" "proxmox-boot-tool kernel pin $highest_version"
             else
-                echo -e "${RED}[!]${NC} No 6.5 kernels installed."
+                echo -e "${RED}[!]${NC} No 6.8 kernels installed."
             fi
 
             # Running NVIDIA GPU checks
