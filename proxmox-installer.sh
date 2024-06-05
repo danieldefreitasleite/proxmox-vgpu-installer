@@ -103,15 +103,6 @@ map_filename_to_version() {
     local filename="$1"
     if [[ "$filename" =~ ^(NVIDIA-Linux-x86_64-535\.54\.06-vgpu-kvm\.run|NVIDIA-Linux-x86_64-535\.104\.06-vgpu-kvm\.run|NVIDIA-Linux-x86_64-535\.129\.03-vgpu-kvm\.run|NVIDIA-Linux-x86_64-535\.161\.05-vgpu-kvm\.run|NVIDIA-Linux-x86_64-550\.54\.10-vgpu-kvm\.run|NVIDIA-Linux-x86_64-550\.54\.16-vgpu-kvm\.run)$ ]]; then
         case "$filename" in
-        #550.54.16 -> 550.54.15 - 17.1 - 4d78514599c16302a0111d355dbf11e3
-        #550.54.10 -> 550.54.14 - 17.0 - 5f5e312cbd5bb64946e2a1328a98c08d
-        #535.183.04 -> 535.183.01 - 16.6 - 68961f01a2332b613fe518afd4bfbfb2 - DISABLED
-        #535.161.05 -> 535.161.08 - 16.5 - bad6e09aeb58942750479f091bb9c4b6
-        #535.161.05 -> 535.161.07 - 16.4 - bad6e09aeb58942750479f091bb9c4b6 - DISABLED
-        #535.154.02 -> 535.154.05 - 16.3 - a2d70f262e413023e97b2c56347f3544 - DISABLED
-        #535.129.03 -> 535.129.03 - 16.2 - 0048208a62bacd2a7dd12fa736aa5cbb
-        #535.104.06 -> 535.104.05 - 16.1 - 1020ad5b89fa0570c27786128385ca48
-        #535.54.06 -> 535.54.03 - 16.0 - b892f75f8522264bc176f5a555acb176
             NVIDIA-Linux-x86_64-535.54.06-vgpu-kvm.run)
                 driver_version="16.0"
                 driver_patch="535.54.06.patch"
@@ -127,26 +118,11 @@ map_filename_to_version() {
                 driver_patch="535.129.03.patch"
                 md5="0048208a62bacd2a7dd12fa736aa5cbb"
                 ;;
-            #NVIDIA-Linux-x86_64-535.154.02-vgpu-kvm.run)
-            #    driver_version="16.3"
-            #    driver_patch=".patch"
-            #    md5="a2d70f262e413023e97b2c56347f3544"
-            #    ;;            
-            #NVIDIA-Linux-x86_64-535.161.05-vgpu-kvm.run)
-            #    driver_version="16.4"
-            #    driver_patch="535.161.05.patch"
-            #    md5="bad6e09aeb58942750479f091bb9c4b6"
-            #    ;;
             NVIDIA-Linux-x86_64-535.161.05-vgpu-kvm.run)
                 driver_version="16.5"
                 driver_patch="535.161.05.patch"
                 md5="bad6e09aeb58942750479f091bb9c4b6"
                 ;;
-            #NVIDIA-Linux-x86_64-535.183.04-vgpu-kvm.run)
-            #    driver_version="16.6"
-            #    driver_patch=".patch"
-            #    md5="68961f01a2332b613fe518afd4bfbfb2"
-            #    ;;
             NVIDIA-Linux-x86_64-550.54.10-vgpu-kvm.run)
                 driver_version="17.0"
                 driver_patch="550.54.10.patch"
@@ -1272,7 +1248,7 @@ case $STEP in
             echo -e "${YELLOW}[-]${NC} Linux: apt install megatools"
             echo -e "${YELLOW}[-]${NC} Linux: megadl https://mega.nz/file/gw0DXYKI#mW58Und9XSlTG3o7XfeepiGvVakG2aO2yYwr6mklXXQ"
             echo -e "${YELLOW}[-]${NC} Windows: https://mega.nz/file/glknnCrD#m0kll2jUXA1URy9ixSAdU40eAR-E9THbUHBBmPVMcUM"
-        if [ "$driver_filename" == "NVIDIA-Linux-x86_64-550.54.10-vgpu-kvm.run" ]; then
+        elif [ "$driver_filename" == "NVIDIA-Linux-x86_64-550.54.10-vgpu-kvm.run" ]; then
             echo -e "${GREEN}[+]${NC} In your VM/LXC download Nvidia GUEST driver (550.54.14) for HOST driver version: 550.54.10 (17.0)"
             echo -e "${YELLOW}[-]${NC} Linux: apt install megatools"
             echo -e "${YELLOW}[-]${NC} Linux: megadl https://mega.nz/file/0xlUzSoA#_g3_fY2g8E14W0DNzph98DAWjBRIaW_tFv25wr7DJHw"
