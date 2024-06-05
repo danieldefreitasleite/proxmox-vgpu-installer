@@ -864,8 +864,6 @@ case $STEP in
 
             read -p "Enter your choice: " driver_choice
 
-            echo ""
-
         # 17.1 -> HOST (550.54.16) -> GUEST (550.54.15) -> MD5 (4d78514599c16302a0111d355dbf11e3) -> PATCH STATUS (OK)"
         # 17.0 -> HOST (550.54.10) -> GUEST (550.54.14) -> MD5 (5f5e312cbd5bb64946e2a1328a98c08d) -> PATCH STATUS (OK)"
         # 16.6 -> HOST (535.183.04) -> GUEST (535.183.01) -> MD5 (68961f01a2332b613fe518afd4bfbfb2) -> PATCH STATUS (N/A)"
@@ -900,28 +898,26 @@ case $STEP in
             map_filename_to_version "$driver_filename"
             
             # Set the driver URL if not provided
-            if [ -z "$URL" ]; then
-                case "$driver_version" in
-                    17.1)
-                        driver_url="https://mega.nz/file/IwsinSJI#27w_nV9zyRTMZtPYt5wJniNATPii-lT5KBWNN8Tg2WA"
-                        ;;
-                    17.0)
-                        driver_url="https://mega.nz/file/84lCWYST#2OGIsRBCEdQy_bcHlV6yMOhV61ffYs0iVvsbFlcWf4Q"
-                        ;;
-                    16.5)
-                        driver_url="https://mega.nz/file/R90GjRCR#SU-ZzV5v_6l6Yt4-RzfCUE2PZ2kU0493-CaBNMbKCto"
-                        ;;
-                    16.2)
-                        driver_url="https://mega.nz/file/so0A0ATA#bpSes3QU5Pq-FhnPw53DCBxG-4ZfpcEj7x9vJJuYVTI"
-                        ;;
-                    16.1)
-                        driver_url="https://mega.nz/file/Rg9BFBoT#9mZPOdpmamv2CiJ8b83V6pGws9Du0OmViLjp8BIh5kQ"
-                        ;;
-                    16.0)
-                        driver_url="https://mega.nz/file/pkUgwbAI#GMc0Xi0TzGSuasUFDH94zARbvUXYoSXiLjyJT4GOq-E"
-                        ;;
-                esac
-            fi
+            case "$driver_version" in
+                17.1)
+                    driver_url="https://mega.nz/file/IwsinSJI#27w_nV9zyRTMZtPYt5wJniNATPii-lT5KBWNN8Tg2WA"
+                    ;;
+                17.0)
+                    driver_url="https://mega.nz/file/84lCWYST#2OGIsRBCEdQy_bcHlV6yMOhV61ffYs0iVvsbFlcWf4Q"
+                    ;;
+                16.5)
+                    driver_url="https://mega.nz/file/R90GjRCR#SU-ZzV5v_6l6Yt4-RzfCUE2PZ2kU0493-CaBNMbKCto"
+                    ;;
+                16.2)
+                    driver_url="https://mega.nz/file/so0A0ATA#bpSes3QU5Pq-FhnPw53DCBxG-4ZfpcEj7x9vJJuYVTI"
+                    ;;
+                16.1)
+                    driver_url="https://mega.nz/file/Rg9BFBoT#9mZPOdpmamv2CiJ8b83V6pGws9Du0OmViLjp8BIh5kQ"
+                    ;;
+                16.0)
+                    driver_url="https://mega.nz/file/pkUgwbAI#GMc0Xi0TzGSuasUFDH94zARbvUXYoSXiLjyJT4GOq-E"
+                    ;;
+            esac
 
             echo -e "${YELLOW}[-]${NC} Driver version: $driver_filename"
 
