@@ -1,7 +1,21 @@
+---------------------------------------------------------------------------------------------------------------------------------------------------------
+TO RUN THE SCRIPT USE THE FOLLOWING COMMANDS:
+
+If GIT is not already installed: apt install -y git
+
+1st run:
+
+cd ~ && git clone https://github.com/danieldefreitasleite/proxmox-vgpu-installer.git && cd proxmox-vgpu-installer && bash proxmox-installer.sh
+
+2nd run (after reboot)
+cd ~ && cd proxmox-vgpu-installer && bash proxmox-installer.sh
+
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 ORIGINAL INSTRUCTIONS ARE IN:
 
 https://gitlab.com/polloloco/vgpu-proxmox
 
+---------------------------------------------------------------------------------------------------------------------------------------------------------
 
 This is a little Bash script that configures a Proxmox 7 or 8 server to use Nvidia vGPU's. 
 
