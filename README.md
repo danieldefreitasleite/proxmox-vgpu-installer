@@ -8,6 +8,7 @@ If GIT is not already installed: apt install -y git
 cd ~ && git clone https://github.com/danieldefreitasleite/proxmox-vgpu-installer.git && cd proxmox-vgpu-installer && bash proxmox-installer.sh
 
 2nd run (after reboot)
+
 cd ~ && cd proxmox-vgpu-installer && bash proxmox-installer.sh
 
 ---------------------------------------------------------------------------------------------------------------------------------------------------------
