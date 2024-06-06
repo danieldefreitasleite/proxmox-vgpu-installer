@@ -640,7 +640,7 @@ case $STEP in
                 elif [ "$vendor_id" = "GenuineIntel" ]; then
                     echo -e "${GREEN}[+]${NC} Your CPU vendor id: ${YELLOW}${vendor_id}${NC}"
                     # Check if the required options are already present in GRUB_CMDLINE_LINUX_DEFAULT
-                    if grep -q "intel_iommu=on iommu=pt" /etc/default/grub; then
+                    if grep -q "intel_iommu=on" /etc/default/grub; then
                         echo -e "${YELLOW}[-]${NC} Intel IOMMU options are already set in GRUB_CMDLINE_LINUX_DEFAULT"
                     else
                         sed -i '/GRUB_CMDLINE_LINUX_DEFAULT/s/"$/ intel_iommu=on iommu=pt"/' /etc/default/grub
@@ -671,7 +671,7 @@ case $STEP in
                     cd /opt
                     rm -rf vgpu_unlock-rs 2>/dev/null 
                     #echo "downloading vgpu_unlock-rs"
-                    run_command "Downloading vgpu_unlock-rs" "info" "git clone https://github.com/mbilker/vgpu_unlock-rs.git"
+                    run_command "Downloading vgpu_unlock-rs" "info" "git clone https://github.com/polloloco/vgpu_unlock-rs.git"
 
                     # Download and source Rust
                     #echo "downloading rust"
@@ -753,17 +753,16 @@ case $STEP in
             echo "After reboot, run the script again to install the Nvidia driver."
             echo ""
 
+            #Write variables to config.txt
+            echo "STEP=2" > "$VGPU_DIR/$CONFIG_FILE"
+            echo "VGPU_SUPPORT=$VGPU_SUPPORT" >> "$VGPU_DIR/$CONFIG_FILE"
+            echo "DRIVER_VERSION=$DRIVER_VERSION" >> "$VGPU_DIR/$CONFIG_FILE"
+
             read -p "$(echo -e "${BLUE}[?]${NC} Reboot your machine now? (y/n): ")" reboot_choice
             if [ "$reboot_choice" = "y" ]; then
-                echo "STEP=2" > "$VGPU_DIR/$CONFIG_FILE"
-                echo "VGPU_SUPPORT=$VGPU_SUPPORT" >> "$VGPU_DIR/$CONFIG_FILE"
-                echo "DRIVER_VERSION=$DRIVER_VERSION" >> "$VGPU_DIR/$CONFIG_FILE"
                 reboot
             else
                 echo "Exiting script. Remember to reboot your machine later."
-                echo "STEP=2" > "$VGPU_DIR/$CONFIG_FILE"
-                echo "VGPU_SUPPORT=$VGPU_SUPPORT" >> "$VGPU_DIR/$CONFIG_FILE"
-                echo "DRIVER_VERSION=$DRIVER_VERSION" >> "$VGPU_DIR/$CONFIG_FILE"
                 exit 0
             fi
             ;;
@@ -971,14 +970,14 @@ case $STEP in
                 echo -e ""
                 echo -e "Please make sure you have IOMMU enabled in the BIOS"
                 echo -e "and make sure that this line is present in /etc/default/grub"
-                echo -e "GRUB_CMDLINE_LINUX_DEFAULT="quiet amd_iommu=on iommu=pt""
+                echo -e "GRUB_CMDLINE_LINUX_DEFAULT="quiet iommu=pt""
                 echo ""
             elif [ "$vendor_id" = "GenuineIntel" ]; then
                 echo -e "${RED}[!]${NC} Intel IOMMU Disabled"
                 echo -e ""
                 echo -e "Please make sure you have VT-d enabled in the BIOS"
                 echo -e "and make sure that this line is present in /etc/default/grub"
-                echo -e "GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on iommu=pt""
+                echo -e "GRUB_CMDLINE_LINUX_DEFAULT="quiet intel_iommu=on""
                 echo ""
             else
                 echo -e "${RED}[!]${NC} Unknown CPU architecture."
